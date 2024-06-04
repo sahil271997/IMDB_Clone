@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="watch.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+  <title>Watch-List</title>
+</head>
+
+<body>
+  <div class="head" id="head">
+    <div class="sub-head" id="sub-head">
+
+      <a href="index.html"> <img id="img"
+          src="https://m.media-amazon.com/images/G/01/imdb/images/social/imdb_logo._CB410901634_.png" alt=""
+          onClick="window.location.reload()" title="Home Button"/> </a>
+      <!-- <span class="menu"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-list"
+              viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>&nbspMenu</span> -->
+      <!-- <div class="search-box">
+            <input type="text" name="" id="search-box" class="search-box" spellcheck="false" placeholder="Search IMDB..." />
+            <div class="movie" id="movie" >
+            </div>
+          </div> -->
+      <!-- <img id="img2" class="imdb-pro"
+            src="data:image/png;base64,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"
+            alt="" /> -->
+
+      <span class="watchlist"> <a href="watchList.html"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+            <path
+              d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
+          </svg>&nbsp Watchlist</a></span>
+    </div>
+  </div>
+  </div>
+
+  <div class="main" id="main">
+   
+  </div>
+</body>
+<script type="module" src="watch.js"></script>
+
+</html>

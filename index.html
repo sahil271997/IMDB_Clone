@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <title>imdb clone</title>
+</head>
+
+<body>
+  <div class="head" id="head">
+    <div class="sub-head" id="sub-head">
+      <div class="h-icon">
+        <img id="img" src="https://m.media-amazon.com/images/G/01/imdb/images/social/imdb_logo._CB410901634_.png" alt=""
+          onClick="window.location.reload()" title="Home Button"/>
+      </div>
+      <span class="menu" ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-list"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+        </svg>&nbspMenu</span>
+      <div class="search-box">
+        <input type="text" name="" id="search-box" class="search-box" spellcheck="false" placeholder="Search IMDB..." title="Enter movie name"/>
+        <img class="srch-btn" id="srch-btn" src="https://cdn-icons-png.flaticon.com/128/2811/2811790.png" alt="">
+        <div class="error-msg" id="error-msg">Movie not Found !!!  &nbsp; <span> Related Search Results</span></div>
+        <div class="movie" id="movie">
+          <!-- <div class="movie-con">
+              <div class="poster">
+                <img
+                  src="https://m.media-amazon.com/images/M/MV5BOGE4NzU1YTAtNzA3Mi00ZTA2LTg2YmYtMDJmMThiMjlkYjg2XkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="details">
+                <h1>thor</h1>
+                <span>2011</span>
+                <p>chrisHemsWorth Imran Khan</p>
+              </div>
+            </div> -->
+        </div>
+      </div>
+      <div class="h-icon">
+        <img id="img2" class="imdb-pro"
+          src="data:image/png;base64,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"
+          alt="" title="Buy Pro"/>
+      </div>
+      <span class="watchlist" title="click to see watchlist"> <a href="watchList.html"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+            fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+            <path
+              d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
+          </svg>&nbsp Watchlist</a></span>
+      <span class="sign-in" title="Click here to sign in">Sign In</span>
+    </div>
+  </div>
+
+  <div class="main" id="main">
+    <div class="add" id="add">
+
+      <!-- swiper js -->
+      <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true"
+        space-between="30" centered-slides="true" autoplay-delay="2500" autoplay-disable-on-interaction="false">
+        <swiper-slide> <img src="./images/im1.jpg" alt=""> </swiper-slide>
+        <swiper-slide> <img src="./images/img2.jpg" alt=""></swiper-slide>
+        <swiper-slide><img src="./images/img3.jpg" alt=""></swiper-slide>
+        <swiper-slide><img src="./images/img4.jpg" alt=""></swiper-slide>
+
+      </swiper-container>
+
+    </div>
+    <div class="crousal" id="crousal">
+      <div class="trailer">
+        <swiper-container style="width: 100%;
+        height: 100%;" class="mySwiper" pagination="true" pagination-clickable="true" navigation="true"
+          space-between="30" centered-slides="true" autoplay-delay="2000" autoplay-disable-on-interaction="false">
+
+          <swiper-slide><img src="./images/wanda.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/365.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/avenger.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/black_panther.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/spide.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/jawan.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/justice.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/sucide.jpg" alt=""></swiper-slide>
+          <swiper-slide><img src="./images/terminator.jpg" alt=""></swiper-slide>
+        </swiper-container>
+        <h3 class="play-trailer"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-play-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path
+              d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+          </svg>
+          Play Trailers</h3>
+      </div>
+      <div class="trailer-side">
+        <div class="up-next">Up Next</div>
+        <div class="next-movie">
+          <div class="next-poster"><img src="./images/annabella.jpg" alt=""></div>
+          <div class="next-name">
+            <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor"
+              class="bi bi-play-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+            </svg>
+            <h3>Annabelle</h3>
+            <span>2009</span>
+          </div>
+        </div>
+        <div class="next-movie">
+          <div class="next-poster"><img src="./images/pirates.jpg" alt=""></div>
+          <div class="next-name">
+            <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor"
+              class="bi bi-play-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+            </svg>
+            <h3>Pirates Of Carebian</h3>
+            <span>2016</span>
+          </div>
+        </div>
+        <div class="next-movie">
+          <div class="next-poster"><img src="./images/phone.jpg" alt=""></div>
+          <div class="next-name">
+            <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor"
+              class="bi bi-play-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+            </svg>
+            <h3>Black Phone</h3>
+            <span>2011</span>
+          </div>
+        </div>
+        </div>
+    <!-- <div class="detail">
+      <div class="movieDetails">
+        <div class="movie-head">
+          <div>
+            <h1>&nbsp;Thor</h1>
+            <div class="spans">
+              <span>&nbsp;Year</span>
+              <span>&nbsp;. Age</span>
+              <span>. hour</span>
+            </div>
+          </div>
+          <div class="movie-ratings">
+            <div class="rate">
+              <h4>IMDB RATING</h4>
+              <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="yellow" class="bi bi-star-fill"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                </svg>
+                7.0/10</span>
+            </div>
+            <div class="y-rate">
+              <h4>YOUR RATING</h4>
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                </svg>
+                Rate
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="movie-body">
+          <div class="movie-img">
+            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="gray" class="bi bi-bookmark-plus"
+              viewBox="0 0 16 16">
+              <path
+                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z" />
+            </svg>
+            <img
+              src="https://m.media-amazon.com/images/M/MV5BOGE4NzU1YTAtNzA3Mi00ZTA2LTg2YmYtMDJmMThiMjlkYjg2XkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SX300.jpg"
+              alt="">
+          </div>
+          <div class="movie-trailer">
+            <div class="h">
+              <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="currentColor"
+                class="bi bi-play-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path
+                  d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+              </svg>
+              <h3>Watch Trailer</h3>
+            </div>
+          </div>
+          <div class="video-img">
+            <div class="div">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="" class="bi bi-fast-forward-circle"
+                viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14Zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16Z" />
+                <path
+                  d="M4.271 5.055a.5.5 0 0 1 .52.038L8 7.386V5.5a.5.5 0 0 1 .79-.407l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 8 10.5V8.614l-3.21 2.293A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445Z" />
+              </svg>
+              <h4>28 Videos</h4>
+            </div>
+            <div class="div">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-images"
+                viewBox="0 0 16 16">
+                <path d="M4.502 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                <path
+                  d="M14.002 13a2 2 0 0 1-2 2h-10a2 2 0 0 1-2-2V5A2 2 0 0 1 2 3a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-1.998 2zM14 2H4a1 1 0 0 0-1 1h9.002a2 2 0 0 1 2 2v7A1 1 0 0 0 15 11V3a1 1 0 0 0-1-1zM2.002 4a1 1 0 0 0-1 1v8l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094l1.777 1.947V5a1 1 0 0 0-1-1h-10z" />
+              </svg>
+              <h4>24 Photos</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about">
+        <div class="about-l">
+          <div class="type">
+            <h4>dummy</h4>
+            <h4>dummy</h4>
+          </div>
+          <hr />
+          <div class="plot">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus dolores laboriosam
+            doloremque minus aperiam est numquam! Eius consectetur dicta maiores id nesciunt tempora voluptatem quam,
+            vero necessitatibus animi esse aut aspernatur aperiam unde eaque!</div>
+          <hr />
+          <div class="director">
+            <h3>Director : <span class="decoration"> name lastname</span></h3>
+          </div>
+          <hr />
+          <div class="writers">
+            <h3> writers : <span class="decoration"> name lastname , name lastname</span></h3>
+          </div>
+          <hr />
+          <div class="stars">
+            <h3> Stars : <span class="decoration">name lastname,name lastname</span></h3>
+          </div>
+        </div>
+        <div class="o-hotstar">
+        <div class="hotstar">
+            <div class="hot"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z"/>
+            </svg> <span>Watch On HotStar</span></div>
+            <div class="more"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg> <span>More Watch Options</span></div>
+            <div class="add-watch">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+              </svg><span>Add to WatchList</span>
+            </div>
+        </div>
+      </div>
+      </div>
+      
+    </div> -->
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+</body>
+<script type="module" src="index.js"></script>
+<!-- <script src="jquery-3.7.1.js"></script> -->
+
+</html>
